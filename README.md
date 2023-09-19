@@ -1,10 +1,8 @@
-<center>
+<p align="center">
+     <img src="/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="Key Warden"/><br />
+</p>
 
-![Key Warden](/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 # key Warden
-</center>
-
-
 
 Key Warden is a Flutter-based password manager designed to securely store and manage your passwords locally. It uses AES encryption with a user-defined master key for added security. Biometric authentication is also supported for quick and secure access.
 
@@ -30,7 +28,7 @@ Key Warden is a Flutter-based password manager designed to securely store and ma
 
     ```bash
         git clone https://github.com/jhelumcorp/keywarden.git
-        cd key-warden
+        cd keywarden
 ## Usage
 
 - **Set Up Master Key**: Launch the app and create a strong master key for access.
@@ -40,8 +38,6 @@ Key Warden is a Flutter-based password manager designed to securely store and ma
 - **Biometric Authentication**: Use fingerprint or face recognition for quick access.
 
 - **Import/Export**: Securely move passwords with JSON files.
-
-- **Backup and Recovery**: Safeguard your data with backup options.
 
 - **Log Out**: Easily log out from the settings menu.
 

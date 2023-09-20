@@ -81,25 +81,9 @@ class _CreateMasterKeyState extends State<CreateMasterKey> {
                             encryptionCipher: HiveAesCipher(
                                 getEncryptKey(_controller.text.trim())))
                         .then((value) => ShowSnackbar.showSuccess(
-                            context, "Master Key Created")));
-
-                    LocalAuthentication auth = LocalAuthentication();
-                    bool canCheckBiometrics = await auth.canCheckBiometrics;
-                    if (canCheckBiometrics) {
-                      await auth
-                          .authenticate(
-                              localizedReason:
-                                  'Add Biometrics to Log In easily next time.',
-                              options:
-                                  const AuthenticationOptions(stickyAuth: true))
-                          .then((value) {
-                        if (value) {
-                          Preferences.addItem('hasBiometrics', true.toString());
-                        }
-
-                        context.go('/');
-                      });
-                    }
+                            context, "Master Key Created"))).then((value) =>  context.go('/'));
+                    
+                   
                   }
                 },
                 style: ButtonStyle(

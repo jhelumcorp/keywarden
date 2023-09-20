@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,6 +14,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:cross_file/cross_file.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -123,7 +123,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
 Future<void> exportData() async {
   final box = Hive.box('passwords');
-  final data = box.values.toList();
+  final data = {
+    'name':'Key Warden',
+    'type':'passwords',
+    'data':box.values.toList()
+  };
+
 
   String jsonData = jsonEncode(data);
 
@@ -136,17 +141,29 @@ Future<void> exportData() async {
 }
 
 Future<bool> importData() async {
+  Directory directory = await getTemporaryDirectory();
+  // directory.delete(recursive: true);
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     dialogTitle: 'Select backup file',
     type: FileType.custom,
     withData: true,
     allowedExtensions: ['json'],
   );
+  
 
   if (result != null) {
-    List data = jsonDecode(utf8.decode(result.files.single.bytes!));
-    await Hive.box('passwords').addAll(data);
-    return true;
+    File file = File(result.files.single.path!);
+    file.delete(recursive: true);
+    try{
+      Map data = jsonDecode(utf8.decode(result.files.single.bytes!));
+      if(data['type']=='passwords'){
+        Hive.box('passwords').addAll(data['data']);
+        return true;
+      }
+      return false;
+    }catch(e){
+      return false;
+    } 
   } else {
     return false;
   }

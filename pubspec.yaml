@@ -22,6 +22,7 @@ dependencies:
   share_plus: ^4.5.3
   file_picker: ^5.5.0
   pay: ^1.1.2
+  cross_file: ^0.3.3+5
 
 dev_dependencies:
   flutter_test:

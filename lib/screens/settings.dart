@@ -141,8 +141,6 @@ Future<void> exportData() async {
 }
 
 Future<bool> importData() async {
-  Directory directory = await getTemporaryDirectory();
-  // directory.delete(recursive: true);
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     dialogTitle: 'Select backup file',
     type: FileType.custom,

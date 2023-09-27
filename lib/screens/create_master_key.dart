@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:keywarden/utils/encryption.dart';
 import 'package:keywarden/utils/snackbar.dart';
-import 'package:local_auth/local_auth.dart';
 
 class CreateMasterKey extends StatefulWidget {
   const CreateMasterKey({super.key});
